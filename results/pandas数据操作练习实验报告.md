@@ -8,6 +8,8 @@
 
 ### 任务 1: 读取数据
 说明你使用的读取数据的函数和过程。
+
+
 def load_data():
     """任务1: 读取数据文件"""
     return pd.read_csv('/home/victor-shao/桌面/data/data.csv')
@@ -23,11 +25,17 @@ def show_basic_info(data):
 ### 任务 3: 处理缺失值
 说明你找出缺失值列和填充缺失值的方法。
 def handle_missing_values(data):
+    
     """任务3: 处理缺失值"""
+    
     missing_columns = data.columns[data.isnull().any()].tolist()
+    
     for col in missing_columns:
+    
         if pd.api.types.is_numeric_dtype(data[col]):
+        
             data[col] = data[col].fillna(data[col].mean())
+    
     return data
 
 ### 任务 4: 数据统计分析
