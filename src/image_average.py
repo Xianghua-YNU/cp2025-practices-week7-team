@@ -35,17 +35,14 @@ def process_image(input_file):
     # 1. 读取图像
     img = plt.imread(input_file)
 
-    # 如果图像是彩色(RGB)，转换为灰度（根据实际情况调整）
-    if img.ndim == 3:
-        img = np.mean(img, axis=2)
 
     # 2. 创建滤波器
     small_filter = create_small_filter()
     large_filter = create_large_filter()
 
     # 3. 应用卷积
-    small_result = sim.convolve(img, small_filter, mode='nearest')
-    large_result = sim.convolve(img, large_filter, mode='nearest')
+    small_result = sim.convolve(img, small_filter)
+    large_result = sim.convolve(img, large_filter)
 
     # 4. 显示结果
     plt.figure(figsize=(15, 5))
@@ -54,20 +51,18 @@ def process_image(input_file):
     plt.subplot(1, 3, 1)
     plt.imshow(img, cmap='gray')
     plt.title('Original Image')
-    plt.axis('off')
+    
 
     # 3×3滤波结果
     plt.subplot(1, 3, 2)
     plt.imshow(small_result, cmap='gray')
     plt.title('3×3 Filter Result')
-    plt.axis('off')
-
+  
     # 15×15滤波结果
     plt.subplot(1, 3, 3)
     plt.imshow(large_result, cmap='gray')
     plt.title('15×15 Filter Result')
-    plt.axis('off')
-
+    
     plt.tight_layout()
     plt.show()
 
