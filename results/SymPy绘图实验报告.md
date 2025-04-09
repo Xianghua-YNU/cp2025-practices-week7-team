@@ -26,14 +26,17 @@
 ### 问题1: 函数曲线 $\cos(\tan(\pi x))$ 绘制结果
 
 *(插入图片或截图并简要分析曲线特点)*
+![屏幕截图 2025-04-09 112841](https://github.com/user-attachments/assets/ccdbf628-06ab-46c2-9ab9-c07b8f6c54e2)
 
 ### 问题2: 隐函数曲线 $e^y + \frac{\cos x}{x} + y = 0$ 绘制结果
 
 *(插入图片或截图并简要分析隐函数曲线特点)*
+![屏幕截图 2025-04-09 112846](https://github.com/user-attachments/assets/c7864ebb-dccf-4c7a-8afb-012761675352)
 
 ### 问题3: 参数曲面绘制结果
 
 *(插入图片或截图并简要分析三维曲面的特点)*
+![屏幕截图 2025-04-09 112850](https://github.com/user-attachments/assets/93fc0847-a1a6-4636-9d70-8055253ec205)
 
 ---
 
