@@ -73,6 +73,4 @@ def process_image(input_file):
 
 
 if __name__ == "__main__":
-    from scipy.signal import fftconvolve
-    large_result = fftconvolve(img, large_filter, mode='same')
     process_image('data/bwCat.tif')
