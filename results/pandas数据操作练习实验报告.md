@@ -93,6 +93,69 @@ def save_processed_data(data):
 
 ### 任务 2: 查看数据基本信息
 粘贴数据的基本信息输出。
+![截图 2025-04-09 20-51-49](https://github.com/user-attachments/assets/2b7425d6-f0ea-446a-80b0-2be487c9f987)
+
+
+
+def load_data():
+    """任务1: 读取数据文件"""
+    return pd.read_csv('/home/victor-shao/桌面/data/data.csv')
+
+def show_basic_info(data):
+    """任务2: 显示数据基本信息"""
+    print("数据基本信息：")
+    data.info()
+
+def handle_missing_values(data):
+    """任务3: 处理缺失值"""
+    missing_columns = data.columns[data.isnull().any()].tolist()
+    for col in missing_columns:
+        if pd.api.types.is_numeric_dtype(data[col]):
+            data[col] = data[col].fillna(data[col].mean())
+    return data
+
+def analyze_statistics(data):
+    """任务4: 统计分析数值列"""
+    numeric_columns = data.select_dtypes(include=['number']).columns
+    for col in numeric_columns:
+        mean_value = data[col].mean()
+        median_value = data[col].median()
+        std_value = data[col].std()
+        print(f"{col} 列的均值: {mean_value}, 中位数: {median_value}, 标准差: {std_value}")
+
+def visualize_data(data, column_name='成绩'):
+    """任务5: 数据可视化"""
+    data[column_name].plot.hist()
+    plt.show()
+
+def save_processed_data(data):
+    """任务6: 保存处理后的数据"""
+    data.to_csv('processed_data.csv', index=False)
+
+def main():
+    """主函数，执行所有数据处理流程"""
+    # 1. 读取数据
+    data = load_data()
+    
+    # 2. 显示基本信息
+    show_basic_info(data)
+    
+    # 3. 处理缺失值
+    processed_data = handle_missing_values(data.copy())
+    
+    # 4. 统计分析
+    analyze_statistics(processed_data)
+    
+    # 6. 数据可视化
+    visualize_data(processed_data)
+    
+    # 7. 保存处理后的数据
+    save_processed_data(processed_data)
+
+if __name__ == "__main__":
+    main()
+utational physics.py…]()
+
 
 ### 任务 3: 处理缺失值
 以平均值代替缺失值
