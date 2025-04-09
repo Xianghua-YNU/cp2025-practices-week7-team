@@ -27,7 +27,11 @@ def calculate_potential(X, Y):
     返回:
         V: 电势值矩阵 (numpy.ndarray)
     """
+    
     # TODO 1: 实现电势计算
+    r_1 = ((X-pos_charge_pos[0])**2 +(Y-pos_charge_pos[1])**2)**(1/2)
+    r_2 = ((X-neg_charge_pos[0])**2 +(Y-neg_charge_pos[1])**2)**(1/2)
+    return (k*q_pos)/r_1 + (k*q_neg)/r_2
     # 提示: 计算每个点到正负电荷的距离，应用电势公式
     pass
 
@@ -42,6 +46,8 @@ def calculate_electric_field(V, spacing):
     返回:
         Ex, Ey: 电场在x和y方向的分量 (numpy.ndarray, numpy.ndarray)
     """
+    Ey, Ex = np.gradient(-V, spacing, spacing)
+    return Ex, Ey
     # TODO 2: 实现电场计算
     # 提示: 使用np.gradient计算电势梯度，注意负号和参数顺序
     pass
@@ -55,17 +61,32 @@ def main():
     y = np.linspace(-0.2, 0.2, 100)
     X, Y = np.meshgrid(x, y)
 
-    # TODO 3: 调用计算函数并绘制结果
-    # 提示: 
-    # 1. 先调用calculate_potential计算电势
-    # 2. 用calculate_electric_field计算电场
-    # 3. 使用plt.contourf绘制电势图
-    # 4. 使用plt.streamplot绘制电场线
-    # 5. 添加必要的标签、图例和标题
-    
+    V = calculate_potential(X, Y)
+    Ex, Ey = calculate_electric_field(V, x[1]-x[0])
+
     plt.figure(figsize=(8, 6))
-    # ... 绘图代码 ...
+    
+    # 修改1: 使用对数间隔的levels
+    levels = np.linspace(-500, 500, 20)  # 自定义范围
+
+    
+    # 修改2: 添加clim限制颜色范围
+    contour = plt.contourf(X, Y, V, levels=levels, cmap='RdBu_r')
+    plt.clim(-500, 500)  # 限制颜色范围
+    
+    plt.colorbar(label='Electric Potential (V)')
+    plt.streamplot(X, Y, Ex, Ey, color='k', density=1.2)
+    plt.xlabel('x (m)')
+    plt.ylabel('y (m)')
+    plt.title('Electric Field and Potential of an Electric Dipole')
+    plt.plot(pos_charge_pos[0], pos_charge_pos[1], 'ro', label='Positive Charge')
+    plt.plot(neg_charge_pos[0], neg_charge_pos[1], 'bo', label='Negative Charge')
+    plt.legend()
+    plt.axis('equal')
+    plt.grid(True)
     plt.show()
+    
+ 
 
 if __name__ == "__main__":
     main()
